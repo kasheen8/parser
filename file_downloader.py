@@ -12,8 +12,8 @@ def download_files(file_names_list: List[str], url: str, headers: dict) -> None:
 
 
 def download_file(file_name: str, url: str, headers: dict) -> None:
-    response2 = requests.get(url=url + file_name, headers=headers)
-    js_content = response2.content.decode('utf-8')
+    file_response = requests.get(url=url + file_name, headers=headers)
+    js_content = file_response.content.decode('utf-8')
 
     unicode_escaped_strings = re.findall(r'\\u[0-9A-Fa-f]{4}', js_content)
 
