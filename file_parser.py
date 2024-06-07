@@ -67,7 +67,7 @@ def parse_file(file_name: str) -> dict:
         for gloss in filtered_glosses:
             if gloss['start'] >= trans_start and gloss['end'] <= trans_end:
                 trans_words.append(gloss['word'])
-        results[trans_text.strip()] = remove_consecutive_duplicates(" ".join(trans_words).replace("  ", " ").strip())
+        results[trans_text.replace("\n", "").strip()] = remove_consecutive_duplicates(" ".join(trans_words).replace("  ", " ").replace("\n", "").strip())
 
     return results
 
