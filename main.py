@@ -53,5 +53,5 @@ def analyze_target_files() -> None:
 
 
 if __name__ == '__main__':
-    # download_target_files()
+    download_target_files()
     analyze_target_files()
