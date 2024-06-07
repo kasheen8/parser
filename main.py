@@ -21,7 +21,7 @@ headers = {
 page_search_pattern = re.compile(r"/data/index/Metadata_page/(\d+)")
 
 files_folder_name = "js"
-target_folder_name = "data_sets"
+target_folder_name = "datasets"
 
 
 def download_target_files() -> None:
@@ -39,12 +39,11 @@ def download_target_files() -> None:
 
 def analyze_target_files() -> None:
     files_directory = Path(files_folder_name)
-    # Перебираем все файлы в папке
     for file_path in files_directory.iterdir():
         if file_path.is_file():
             results = file_parser.parse_file(f"{files_folder_name}/{file_path.name}")
-            with (open('data_sets/translations.txt', 'a', encoding='utf-8') as trans_file,
-                  open('data_sets/combined_gloss.txt', 'a', encoding='utf-8') as gloss_file):
+            with (open(f'{target_folder_name}/translations.txt', 'a', encoding='utf-8') as trans_file,
+                  open(f'{target_folder_name}/combined_gloss.txt', 'a', encoding='utf-8') as gloss_file):
                 for trans_text, combined_words in results.items():
                     if len(combined_words) == 0 or len(trans_text) == 0:
                         continue
