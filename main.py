@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import asyncio
 import re
 from pathlib import Path
 
@@ -35,7 +35,7 @@ def download_target_files() -> None:
                                 in site_parser.extract_file_names(url=url + add_data_url + add_pages_url + str(page),
                                                                   headers=headers)])
     Path(files_folder_name).mkdir(parents=True, exist_ok=True)
-    file_downloader.download_files(list(set(file_names_list)), url=url + add_video_url, headers=headers)
+    asyncio.run(file_downloader.download_files(list(set(file_names_list)), url=url + add_video_url, headers=headers))
 
 
 def analyze_target_files() -> None:
