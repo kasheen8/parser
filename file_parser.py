@@ -15,7 +15,11 @@ def parse_file(file_name: str) -> dict:
     words_match = re.search(words_pattern, js_data, re.DOTALL)
 
     # Получаем данные из файла
-    tiers = json.loads(tiers_match.group(1))
+    try:
+        tiers = json.loads(tiers_match.group(1))
+    except AttributeError:
+        print(f"{type(tiers_match)} object has no attribute 'group'")
+        return {}
 
     right_hand_gloss, left_hand_gloss, translation = tiers[0], tiers[1], tiers[2]
     words = json.loads(words_match.group(1))
