@@ -34,11 +34,13 @@ def download_target_files() -> None:
         file_names_list.extend([f"{file_name}.js" for file_name
                                 in site_parser.extract_file_names(url=url + add_data_url + add_pages_url + str(page),
                                                                   headers=headers)])
+    Path(files_folder_name).mkdir(parents=True, exist_ok=True)
     file_downloader.download_files(list(set(file_names_list)), url=url + add_video_url, headers=headers)
 
 
 def analyze_target_files() -> None:
     files_directory = Path(files_folder_name)
+    Path(target_folder_name).mkdir(parents=True, exist_ok=True)
     for file_path in files_directory.iterdir():
         if file_path.is_file():
             results = file_parser.parse_file(f"{files_folder_name}/{file_path.name}")
